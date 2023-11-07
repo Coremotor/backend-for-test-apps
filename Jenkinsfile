@@ -13,20 +13,6 @@ pipeline {
             }
         }
 
-        stage('install dependencies') {
-            steps {
-                sh "corepack enable"
-                sh "yarn set version stable"
-                sh "yarn install"
-            }
-        }
-
-        stage('Build app') {
-            steps {
-                sh 'yarn build'
-            }
-        }
-
         stage('Files') {
             steps {
                 sh 'ls -la'
@@ -49,8 +35,12 @@ node {
         remote.allowAnyHosts = true
         stage('Remote SSH') {
             sshPut remote: remote, from: '.', into: '../usr/fortestapps_api/'
-            sshCommand remote: remote, command: "pm2 start ../usr/fortestapps_api/index.js"
+            sshCommand remote: remote, command: "cd ../usr/fortestapps_api/api"
+            sshCommand remote: remote, command: "ll"
+            sshCommand remote: remote, command: "corepack enable"
+            sshCommand remote: remote, command: "yarn set version stable"
+            sshCommand remote: remote, command: "yarn install"
+            sshCommand remote: remote, command: "pm2 start index.js"
         }
     }
-
 }
