@@ -13,14 +13,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fastify_1 = __importDefault(require("fastify"));
-const server = (0, fastify_1.default)();
-server.get('/ping', (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
-    return 'pong\n';
-}));
-server.listen({ port: 8080 }, (err, address) => {
-    if (err) {
-        console.error(err);
+const pino_1 = __importDefault(require("pino"));
+const user_router_1 = __importDefault(require("./src/routes/user.router"));
+const cors_1 = __importDefault(require("@fastify/cors"));
+const server = (0, fastify_1.default)({
+    logger: (0, pino_1.default)({ level: 'info' }),
+});
+server.get('/api', (request, reply) => {
+    reply.send({ name: 'for test apps api' });
+});
+server.register(cors_1.default);
+server.register(user_router_1.default, { prefix: '/api/user' });
+const start = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield server.listen({ port: 1234 });
+    }
+    catch (err) {
+        server.log.error(err);
         process.exit(1);
     }
-    console.log(`Server listening at ${address}`);
 });
+void start();
