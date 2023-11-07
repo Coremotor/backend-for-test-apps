@@ -48,7 +48,7 @@ node {
         remote.password = SSH_CLOUD
         remote.allowAnyHosts = true
         stage('Remote SSH') {
-            sshPut remote: remote, from: 'index.js', into: '../usr/fortestapps_api/'
+            sshPut remote: remote, from: '.', into: '../usr/fortestapps_api/'
             sshCommand remote: remote, command: "pm2 start ../usr/fortestapps_api/index.js"
         }
     }
