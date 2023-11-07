@@ -34,8 +34,8 @@ node {
         remote.password = SSH_CLOUD
         remote.allowAnyHosts = true
         stage('Remote SSH') {
-            sshPut remote: remote, from: '.', into: '../usr/fortestapps_api/'
-            sshCommand remote: remote, command: "cd ../usr/fortestapps_api/api"
+            sshPut remote: remote, from: '.', into: '../usr'
+            sshCommand remote: remote, command: "cd ../usr/api"
             sshCommand remote: remote, command: "ll"
             sshCommand remote: remote, command: "corepack enable"
             sshCommand remote: remote, command: "yarn set version stable"
