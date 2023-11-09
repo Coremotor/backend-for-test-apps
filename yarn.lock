@@ -339,7 +339,6 @@ __metadata:
     "@fastify/cors": "npm:^8.4.1"
     "@types/node": "npm:^20.8.10"
     fastify: "npm:^4.24.3"
-    pino: "npm:^8.16.1"
     ts-node-dev: "npm:^2.0.0"
     typescript: "npm:^5.2.2"
   languageName: unknown
@@ -1351,7 +1350,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino@npm:^8.16.0, pino@npm:^8.16.1":
+"pino@npm:^8.16.0":
   version: 8.16.1
   resolution: "pino@npm:8.16.1"
   dependencies:
