@@ -11,7 +11,7 @@ server.get('/api', (request, reply) => {
 })
 
 server.register(cors, {
-    origin: false
+    origin: '*'
 })
 server.register(userRouter, {prefix: '/api/user'})
 
